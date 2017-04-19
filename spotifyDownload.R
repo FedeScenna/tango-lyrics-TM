@@ -61,8 +61,8 @@ album_info <- filter(album_info, !album_name %in% non_studio_albums)
 
 get_tracks <- function(artist_info, album_info) {
   
-  client_id <- '8040524868f74349ae250722a251bb59'
-  client_secret <- '40a6dbb47ea84199bef06ebd5420b2e0'
+  client_id <- 'XXXXXXX'
+  client_secret <- 'XXXXXX'
   access_token <- POST('https://accounts.spotify.com/api/token',
                        accept_json(), authenticate(client_id, client_secret),
                        body = list(grant_type='client_credentials'),
