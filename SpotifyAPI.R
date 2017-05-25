@@ -1,16 +1,14 @@
 library(Rspotify)
-keys <- spotifyOAuth("Tango SA","8040524868f74349ae250722a251bb59","623bcbdbedaa48ff9ad0eb40fdf7db7a")
+
+#Get songs from "Tangos y Milongas" playlist
 songs <- getPlaylistSongs("spotify","37i9dQZF1DXcCT9tm6fRIV",token=keys)
 
-spotify_df<-data.frame()
-
+#Get the features of each song in a new dataframe.
+features<-data.frame()
 for (i in 1:nrow(songs)){
-  
-  temp_df<-as.data.frame(songs$tracks[i])
-  temp_df<-cbind(temp_df, songs$artist[i])
-  temp_df<-cbind(temp_df,getFeatures(songs$id[i], token=keys))
-  spotify_df<-rbind(spotify_df, temp_df)
+  ft<-getFeatures(songs$id[i], token=keys)
+  features <- rbind(features, ft)
 }
 
-library(data.table)
-setnames(spotify_df, old = c('songs$tracks[i]','songs$artist[i]'), new = c('Song','Artist'))
+#Merge two dataframes in one
+songs <- merge(songs, features, by="id")
