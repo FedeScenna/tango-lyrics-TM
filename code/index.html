@@ -3,26 +3,23 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Tango Sentiment Analysis</title>
-		<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style type="text/css">
 		
 		
 		</style>
 	</head>
 	<body>
-		<script type="text/javascript">
-		d3.csv("../data/freq.csv", function(error,data) {
-            if (error) {
-                console.log(error); //log the error if error is not null.  
-            } else { //No error. File loaded correctly. 
-                console.log(data);
-            }
+        <script type="text/javascript">
+        var dataset = [];
+		d3.csv("../data/freq.csv", function(error,dataset) {
+            dataset.forEach(function(d) {
+                d.freq = +d.freq;
+            });
 
-            dataset = data;
-        })
-        .row(function(d) { return {key: d.key, value: +d.value}; })
-        .get(function(error, rows) { console.log(rows); });
-			
+            console.log(dataset);
+        });
 		</script>
 	</body>
 </html>
