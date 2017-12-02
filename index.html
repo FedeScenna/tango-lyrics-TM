@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Tango Sentiment Analysis</title>
+        <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+        <script type="text/javascript">
+        var dataset = [];
+		
+		d3.csv("../data/freq.csv", function(error,dataset) {
+
+			console.log(dataset);
+			console.log(d3.keys(dataset[0]));
+			//Horizontal bar chart
+			var word = [];
+			var freq = [];
+			for (var i = 0; i < dataset.length; i++ ){
+				word.push(dataset[i]['names.f.']);
+				freq.push(parseFloat(dataset[i].freq));
+			}
+
+
+
+			//d3.select("body").selectAll("p")
+			//	.data(dataset)
+			//	.enter()
+			//	.append("div")
+			//	.attr("class","bar")
+			//	.style("width",function(d){
+			//		var barWidth= d*5;
+			//		return barWidth + "px";
+			//	});
+
+
+        });
+
+		</script>
+	</body>
+</html>
