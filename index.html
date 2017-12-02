@@ -6,17 +6,25 @@
         <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style type="text/css">
+		
+			div.bar {
+				display: inline-block;
+				width: 20px;
+				height: 75px;	/* Gets overriden by D3-assigned height below */
+				margin-right: 2px;
+				background-color: teal;
+			}
+		
 		</style>
 	</head>
 	<body>
         <script type="text/javascript">
         var dataset = [];
-		
+
 		d3.csv("../data/freq.csv", function(error,dataset) {
 
-			console.log(dataset);
-			console.log(d3.keys(dataset[0]));
-			//Horizontal bar chart
+			// Data for  Horizontal bar chart
+
 			var word = [];
 			var freq = [];
 			for (var i = 0; i < dataset.length; i++ ){
@@ -24,17 +32,16 @@
 				freq.push(parseFloat(dataset[i].freq));
 			}
 
-
-
-			//d3.select("body").selectAll("p")
-			//	.data(dataset)
-			//	.enter()
-			//	.append("div")
-			//	.attr("class","bar")
-			//	.style("width",function(d){
-			//		var barWidth= d*5;
-			//		return barWidth + "px";
-			//	});
+			//Horizontal bar chart
+			d3.select("body").selectAll("div")
+    			.data(freq)
+   				.enter()
+   				.append("div")
+    			.attr("class", "bar")
+    			.style("width", function(d) {
+    			    var barWidth = d * 5;
+    			    return barWidth + "px";
+    			});
 
 
         });
