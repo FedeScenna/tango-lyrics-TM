@@ -6,25 +6,21 @@
         <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style type="text/css">
-		
-			div.bar {
-				display: inline-block;
-				width: 20px;
-				height: 75px;	/* Gets overriden by D3-assigned height below */
-				margin-right: 2px;
-				background-color: teal;
+			.barchart1 div {
+			font: 10px sans-serif;
+			background-color: steelblue;
+			text-align: right;
+			padding: 3px;
+			margin: 1px;
+			color: white;
 			}
-		
 		</style>
 	</head>
 	<body>
         <script type="text/javascript">
         var dataset = [];
-
 		d3.csv("../data/freq.csv", function(error,dataset) {
-
 			// Data for  Horizontal bar chart
-
 			var word = [];
 			var freq = [];
 			for (var i = 0; i < dataset.length; i++ ){
@@ -32,20 +28,21 @@
 				freq.push(parseFloat(dataset[i].freq));
 			}
 
+			var x = d3.scaleLinear().domain([0, d3.max(freq)])
+									.range([0,420]);
 			//Horizontal bar chart
-			d3.select("body").selectAll("div")
+			d3.select(".barchart1").selectAll("div")
     			.data(freq)
    				.enter()
    				.append("div")
-    			.attr("class", "bar")
     			.style("width", function(d) {
-    			    var barWidth = d * 5;
+    			    var barWidth = x(d);
     			    return barWidth + "px";
-    			});
-
-
+    			})
+				.text(function(d){return d;});
         });
+</script>
 
-		</script>
+<div class="barchart1"></div>
 	</body>
 </html>
