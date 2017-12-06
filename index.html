@@ -24,10 +24,9 @@
 			var word = [];
 			var freq = [];
 			for (var i = 0; i < dataset.length; i++ ){
-				word.push(dataset[i]['names.f.']);
+				word.push(dataset[i]['word']);
 				freq.push(parseFloat(dataset[i].freq));
 			}
-
 			var x = d3.scaleLinear().domain([0, d3.max(freq)])
 									.range([0,420]);
 			//Horizontal bar chart
